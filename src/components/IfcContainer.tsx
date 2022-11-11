@@ -17,12 +17,8 @@ const IfcContainer = () => {
     return ifcViewer
   }
 
-  const multithreading = async (viewer: IfcViewerAPI) => {
-    await viewer.IFC.loader.ifcManager.useWebWorkers(true, '../../../IFCWorker.js')
-    await viewer.IFC.setWasmPath('../../../')
-  }
-
   const loadModel = async (viewer: IfcViewerAPI, url: string) => {
+    await viewer.IFC.setWasmPath('../../../')
     const model = await viewer.IFC.loadIfcUrl(url)
     viewer.shadowDropper.renderShadow(model.modelID)
     viewer.clipper.active = true
@@ -72,7 +68,6 @@ const IfcContainer = () => {
 
   useEffect(() => {
     if (!viewer) return
-    multithreading(viewer)
     loadModel(viewer, '../../../01.ifc')
   }, [viewer])
 
