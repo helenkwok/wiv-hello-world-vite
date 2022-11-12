@@ -18,7 +18,7 @@ const IfcContainer = () => {
   }
 
   const loadModel = async (viewer: IfcViewerAPI, url: string) => {
-    await viewer.IFC.setWasmPath('../../../')
+    await viewer.IFC.setWasmPath('./')
     const model = await viewer.IFC.loadIfcUrl(url)
     viewer.shadowDropper.renderShadow(model.modelID)
     viewer.clipper.active = true
@@ -68,7 +68,7 @@ const IfcContainer = () => {
 
   useEffect(() => {
     if (!viewer) return
-    loadModel(viewer, '../../../01.ifc')
+    loadModel(viewer, './01.ifc')
   }, [viewer])
 
   return (
