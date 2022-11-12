@@ -21,10 +21,6 @@ jobs:
       - name: build
         run: npm run build
       - name: Deploy
-        if: |
-            github.event_name == 'push' &&
-            contains(join(toJson(github.event.commits.*.message), ' '), '#skip') != true
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          folder: dist
