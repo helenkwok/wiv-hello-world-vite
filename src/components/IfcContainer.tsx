@@ -4,7 +4,8 @@ import { Color } from 'three'
 
 const IfcContainer = () => {
   const ifcContainer = useRef<HTMLDivElement>(null)
-  const [viewer, setViewer] = useState<IfcViewerAPI>()
+  const [initialViewer, setInitialViewer] = useState<IfcViewerAPI | null>(null)
+  const [viewer, setViewer] = useState<IfcViewerAPI | null>(null)
 
   const loadIfc = async (container: HTMLDivElement) => {
     const ifcViewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) })
@@ -22,6 +23,7 @@ const IfcContainer = () => {
     const model = await viewer.IFC.loadIfcUrl(url)
     viewer.shadowDropper.renderShadow(model.modelID)
     viewer.clipper.active = true
+    setInitialViewer(null)
   }
 
   const ifcCleanup = async (ifcViewer: IfcViewerAPI) => {
@@ -42,16 +44,18 @@ const IfcContainer = () => {
     if (!viewer) return
     if(event.code === 'KeyP') {
       viewer.clipper.createPlane()
-  }
-  else if(event.code === 'KeyO') {
+    }
+    if(event.code === 'KeyO') {
       viewer.clipper.deletePlane()
-  }
+    }
   }
 
   useLayoutEffect(() => {
     let ifcViewer: IfcViewerAPI
+
     const initialize = async (ifcContainer: HTMLDivElement) => {
       ifcViewer = await loadIfc(ifcContainer)
+      setInitialViewer(ifcViewer)
       setViewer(ifcViewer)
     }
 
@@ -67,9 +71,10 @@ const IfcContainer = () => {
   }, [])
 
   useEffect(() => {
-    if (!viewer) return
-    loadModel(viewer, './01.ifc')
-  }, [viewer])
+    if (initialViewer) {
+      loadModel(initialViewer, './01.ifc')
+    }
+  }, [initialViewer])
 
   return (
     <div className={'ifcContainer'}
