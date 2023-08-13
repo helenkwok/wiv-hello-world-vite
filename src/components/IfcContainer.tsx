@@ -9,8 +9,8 @@ const IfcContainer = () => {
 
   const loadIfc = async (container: HTMLDivElement) => {
     const ifcViewer = new IfcViewerAPI({ container, backgroundColor: new Color(0xffffff) })
-    ifcViewer.addAxes()
-    ifcViewer.addGrid()
+    ifcViewer.axes.setAxes()
+    ifcViewer.grid.setGrid()
     await ifcViewer.IFC.loader.ifcManager.applyWebIfcConfig({
       COORDINATE_TO_ORIGIN: true,
       USE_FAST_BOOLS: false
