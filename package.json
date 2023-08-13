@@ -11,14 +11,14 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "web-ifc-viewer": "^1.0.216"
+    "web-ifc-viewer": "^1.0.218"
   },
   "devDependencies": {
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "@types/three": "^0.146.0",
-    "@vitejs/plugin-react": "^2.2.0",
-    "typescript": "^4.6.4",
-    "vite": "^3.2.3"
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "@types/three": "^0.155.0",
+    "@vitejs/plugin-react": "^4.0.4",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9"
   }
 }
